@@ -1,15 +1,27 @@
 trigger: none
 pool: Default
 
-stages:
-  - stage: 
+stages: 
+  - stage: Terraforminittoplan
+    displayName: Terraform init to plan
     jobs:
       - job: 
-            steps:
+        steps:
             
             - task: TerraformInstaller@1
               inputs:
                 terraformVersion: 'latest'
+
+            - task: TerraformTask@5
+              inputs:
+                provider: 'azurerm'
+                command: 'init'
+                backendServiceArm: 'June'
+                backendAzureRmStorageAccountName: 'sgt121213'
+                backendAzureRmContainerName: 'grt'
+                backendAzureRmKey: 'statefile.tf'
+
+
 
 
 
